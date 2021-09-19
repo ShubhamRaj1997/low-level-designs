@@ -20,3 +20,6 @@ class SpotAlreadyOccupiedException(Exception):
 
 class TicketExpiredException(Exception):
     pass
+
+class MethodNotImplementedException(Exception):
+    pass
