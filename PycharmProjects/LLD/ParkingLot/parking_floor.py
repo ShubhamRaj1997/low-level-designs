@@ -84,3 +84,4 @@ class ParkingFloor(object):
                 self.__floor_parking_spots[parking_spot_type].available_spots())
         for floor_display in self.__floor_displays:
             floor_display.display(display_data, self.__id)
+

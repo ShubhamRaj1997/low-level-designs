@@ -1,10 +1,10 @@
 from constants.floor_constants import ParkingSpotTypeFloorSpotsMap
 from enums import ParkingSpotType
 from exceptions import NoFreeSpotFoundException
+from factory.FloorParkingTypeFactory import ParkingFloorInfo, ParkingFloorCreatorV1
 from models.floor_display import FloorDisplay
 from models.parking_spot import ParkingSpot
 from models.ticket import ParkingTicketHelper
-from parking_floor import ParkingFloor
 
 
 def take_input_int(msg):
@@ -30,7 +30,8 @@ def simulate():
             num_spots = int(input(f"Enter how many spots for type: {park_type.name}\n"))
             parking_spots = [ParkingSpot(park_type, i)] * num_spots
             park_type_slots_dict[park_type] = ParkingSpotTypeFloorSpotsMap.get(park_type)(parking_spots)
-        parking_floors.append(ParkingFloor(i, park_type_slots_dict, [FloorDisplay()]))
+        park_floor_info = ParkingFloorInfo(i, park_type_slots_dict, [FloorDisplay()])
+        parking_floors.append(ParkingFloorCreatorV1().factory_method(park_floor_info))
     parking_spot_type = ParkingSpotType(enter_spot_type())
     floor = int(input(f"Enter floor number (any number from 0 to {FLOORS - 1} and -1 if you any will work): \n"))
     free_spot = None
